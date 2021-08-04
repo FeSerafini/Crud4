@@ -43,8 +43,8 @@ crud.controller("controller", function ($scope) {
        $scope.novoMaterial = {};
    };
 
-   $scope.selecionaMaterial = function (cliente) {
-        $scope.materialSelecionado = cliente;
+   $scope.selecionaMaterial = function (material) {
+        $scope.materialSelecionado = material;
    };
 
    $scope.alterarMaterial = function () {
