@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="crud">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerenciamento de Materiais</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="angular/angular.min.js"></script>
+    <script src="angular/app.js"></script>
+</head>
+
+
+<body ng-controller="controller" style="background-color: #ffffff">
+<hr>
+<div class='col-sm-offset-4 col-sm-4'>
+    <h2> Listagem de Materiais </h2>
+</div>
+<div class='col-sm-4'>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Novo</button>
+</div>
+<hr>
+<div class=' col-sm-offset-1 col-sm-9'>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th style="border: 0px;">Nome do Material</th>
+            <th style="border: 0px;">Linha</th>
+            <th style="border: 0px;">Tipo</th>
+            <th style="border: 0px;">Produto</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="material in materiais">
+            <td>{{material.materialName}}</td>
+            <td>{{material.linha}}</td>
+            <td>{{material.tipo}}</td>
+            <td>{{material.produto}}</td>
+            <td>
+                <button type="button" class="btn btn-warning" data-toggle="modal"
+                        data-target="#myModalEditar" ng-click="selecionaMaterial(material)">Editar</button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger" data-toggle="modal"
+                        data-target="#myModalExcluir" ng-click="selecionaMaterial(material)">Excluir</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Novo Material</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal needs-validation" role="form">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Material</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="Nome do Material..."
+                            ng-model="novoMaterial.materialName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Linha</label>
+                        <div class="col-sm-10 form-check">
+                        <input class="form-check-input" type="radio" id="cvm0" ng-model="novoMaterial.linha" value="0">
+                        <label class="form-check-label" for="cvm0">CVM</label><br>
+                        <input class="form-check-input" type="radio" id="snc1" ng-model="novoMaterial.linha" value="1">
+                        <label class="form-check-label" for="cvm0">SNC</label><br>
+                        <input class="form-check-input" type="radio" id="hibrido2" ng-model="novoMaterial.linha" value="2">
+                        <label class="form-check-label" for="cvm0">Hibrido</label><br>
+                        <input class="form-check-input" type="radio" id="institucional3" ng-model="novoMaterial.linha" value="3">
+                        <label class="form-check-label" for="cvm0">Institucional</label><br> 
+                        </div> 
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Tipo</label>
+                        <div class="col-sm-10">
+                        
+                        <select class="form-control" ng-model="novoMaterial.tipo">
+                            <option value="">
+                            <option value="0">Material Técnico
+                            <option value="1">Podcast
+                            <option value="2">Prestação de Serviço
+                            <option value="3">Webinar
+                            <option value="4">Sandoz Talks
+                        </select>
+                        </div>
+                        
+                    </div> 
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Produto</label>
+                        <div class="col-sm-10">
+                        
+                        <select class="form-control" ng-model="novoMaterial.produto">
+                            <option value="">
+                            <option value="1">Rispalum®
+                            <option value="2">Rosulib
+                            <option value="3">Neotiapim
+                            <option value="4">Plagrel®
+                            <option value="5">Tegretol® / Tegretol® CR
+                            <option value="6">EXELON® PATCH
+                            <option value="7">RITALINA® LA
+                            <option value="8">RITALINA®
+                            <option value="9">STALEVO®
+                            <option value="10">TRILEPTAL®
+                            <option value="11">DIOVAN® HCT
+                            <option value="12">APRESOLINA®
+                            <option value="13">DIOVAN®
+                            <option value="14">COMTAN®
+                            <option value="15">Pidezot
+                            <option value="16">Lesdot
+                            <option value="17">Sandoz
+                        </select>
+                        </div>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Palavras-Chave</label>
+                        <div class="col-sm-10">
+                        <textarea placeholder="Palavra1;Palavra2;Palavra3..." ng-model=novoMaterial.keyWord class="form-control" rows="3" ></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Descrição</label>
+                        <div class="col-sm-10">
+                        <textarea placeholder="Digite a descrição do material..." ng-model=novoMaterial.desc class="form-control" rows="6" ></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Formato</label>
+                        <div class="col-sm-10 form-check">
+                            <input class="form-check-input" type="radio" id="link" name="linkFile" ng-model="linkFile" value="link">
+                            <label class="form-check-label" for="link">Link</label><br>
+                            <input class="form-check-input" type="radio" id="file" name="linkFile" ng-model="linkFile" value="file">
+                            <label class="form-check-label" for="file">Arquivo</label>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="linkFile == 'file'">
+                        <label class="control-label col-sm-2">Arquivo</label>
+                        <div class="col-sm-10">
+                        <input class="form-control" type="file" ng-model="novoMaterial.arquivo">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="linkFile == 'link'">
+                        <label class="control-label col-sm-2">Link</label>
+                        <div class="col-sm-10">
+                        <input class="form-control" placeholder="Digite um link..." type="url" ng-model="novoMaterial.link">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary"
+                            ng-click="salvar()" data-dismiss="modal">Salvar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModalEditar" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Editar Material</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Material</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="Nome do Material..."
+                            ng-model="materialSelecionado.materialName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Linha</label>
+                        <div class="col-sm-10 form-check">
+                        <input class="form-check-input" type="radio" id="cvm0" ng-model="materialSelecionado.linha" value="0">
+                        <label class="form-check-label" for="cvm0">CVM</label><br>
+                        <input class="form-check-input" type="radio" id="snc1" ng-model="materialSelecionado.linha" value="1">
+                        <label class="form-check-label" for="cvm0">SNC</label><br>
+                        <input class="form-check-input" type="radio" id="hibrido2" ng-model="materialSelecionado.linha" value="2">
+                        <label class="form-check-label" for="cvm0">Hibrido</label><br>
+                        <input class="form-check-input" type="radio" id="institucional3" ng-model="materialSelecionado.linha" value="3">
+                        <label class="form-check-label" for="cvm0">Institucional</label><br> 
+                        </div> 
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Tipo</label>
+                        <div class="col-sm-10">
+                        
+                        <select class="form-control" ng-model="materialSelecionado.tipo">
+                            <option value="">
+                            <option value="0">Material Técnico
+                            <option value="1">Podcast
+                            <option value="2">Prestação de Serviço
+                            <option value="3">Webinar
+                            <option value="4">Sandoz Talks
+                        </select>
+                        </div>
+                        
+                    </div> 
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Produto</label>
+                        <div class="col-sm-10">
+                        
+                        <select class="form-control" ng-model="materialSelecionado.produto">
+                            <option value="">
+                            <option value="1">Rispalum®
+                            <option value="2">Rosulib
+                            <option value="3">Neotiapim
+                            <option value="4">Plagrel®
+                            <option value="5">Tegretol® / Tegretol® CR
+                            <option value="6">EXELON® PATCH
+                            <option value="7">RITALINA® LA
+                            <option value="8">RITALINA®
+                            <option value="9">STALEVO®
+                            <option value="10">TRILEPTAL®
+                            <option value="11">DIOVAN® HCT
+                            <option value="12">APRESOLINA®
+                            <option value="13">DIOVAN®
+                            <option value="14">COMTAN®
+                            <option value="15">Pidezot
+                            <option value="16">Lesdot
+                            <option value="17">Sandoz
+                        </select>
+                        </div>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Palavras-Chave</label>
+                        <div class="col-sm-10">
+                        <textarea placeholder="Palavra1;Palavra2;Palavra3..." ng-model=materialSelecionado.keyWord class="form-control" rows="3" ></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Descrição</label>
+                        <div class="col-sm-10">
+                        <textarea placeholder="Digite a descrição do material..." ng-model=materialSelecionado.desc class="form-control" rows="6" ></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Formato</label>
+                        <div class="col-sm-10 form-check">
+                            <input class="form-check-input" type="radio" id="link" name="linkFile" ng-model="linkFile" value="link">
+                            <label class="form-check-label" for="link">Link</label><br>
+                            <input class="form-check-input" type="radio" id="file" name="linkFile" ng-model="linkFile" value="file">
+                            <label class="form-check-label" for="file">Arquivo</label>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="linkFile == 'file'">
+                        <label class="control-label col-sm-2">Arquivo</label>
+                        <div class="col-sm-10">
+                        <input class="form-control" type="file" ng-model="materialSelecionado.arquivo">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="linkFile == 'link'">
+                        <label class="control-label col-sm-2">Link</label>
+                        <div class="col-sm-10">
+                        <input class="form-control" placeholder="Digite um link..." type="url" ng-model="materialSelecionado.link">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary"
+                            ng-click="alterarMaterial()" data-dismiss="modal">Salvar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModalExcluir" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Você tem certeza?</h4>
+            </div>
+            <div class="modal-body">
+                <h4 style="font-weight: bolder"> Você vai excluir {{materialSelecionado.materialName}}</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"
+                ng-click="excluirMaterial()" data-dismiss="modal">Sim</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+</html>
