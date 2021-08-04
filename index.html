@@ -62,24 +62,24 @@
                 <h4 class="modal-title">Novo Material</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal needs-validation" role="form">
+                <form name="frm" class="form-horizontal needs-validation" role="form" novalidate>
                     <div class="form-group">
                         <label class="control-label col-sm-2">Material</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" placeholder="Nome do Material..."
-                            ng-model="novoMaterial.materialName" required>
+                            ng-model="novoMaterial.materialName" ng-required="true">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2">Linha</label>
                         <div class="col-sm-10 form-check">
-                        <input class="form-check-input" type="radio" id="cvm0" ng-model="novoMaterial.linha" value="0">
+                        <input class="form-check-input" type="radio" id="cvm0" ng-model="novoMaterial.linha" value="0" ng-required="true">
                         <label class="form-check-label" for="cvm0">CVM</label><br>
-                        <input class="form-check-input" type="radio" id="snc1" ng-model="novoMaterial.linha" value="1">
+                        <input class="form-check-input" type="radio" id="snc1" ng-model="novoMaterial.linha" value="1" ng-required="true">
                         <label class="form-check-label" for="cvm0">SNC</label><br>
-                        <input class="form-check-input" type="radio" id="hibrido2" ng-model="novoMaterial.linha" value="2">
+                        <input class="form-check-input" type="radio" id="hibrido2" ng-model="novoMaterial.linha" value="2" ng-required="true">
                         <label class="form-check-label" for="cvm0">Hibrido</label><br>
-                        <input class="form-check-input" type="radio" id="institucional3" ng-model="novoMaterial.linha" value="3">
+                        <input class="form-check-input" type="radio" id="institucional3" ng-model="novoMaterial.linha" value="3" ng-required="true">
                         <label class="form-check-label" for="cvm0">Institucional</label><br> 
                         </div> 
                     </div>
@@ -87,7 +87,7 @@
                         <label class="control-label col-sm-2">Tipo</label>
                         <div class="col-sm-10">
                         
-                        <select class="form-control" ng-model="novoMaterial.tipo">
+                        <select class="form-control" ng-model="novoMaterial.tipo" ng-required="true">
                             <option value="">
                             <option value="0">Material Técnico
                             <option value="1">Podcast
@@ -102,7 +102,7 @@
                         <label class="control-label col-sm-2">Produto</label>
                         <div class="col-sm-10">
                         
-                        <select class="form-control" ng-model="novoMaterial.produto">
+                        <select class="form-control" ng-model="novoMaterial.produto" ng-required="true">
                             <option value="">
                             <option value="1">Rispalum®
                             <option value="2">Rosulib
@@ -128,21 +128,21 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2">Palavras-Chave</label>
                         <div class="col-sm-10">
-                        <textarea placeholder="Palavra1;Palavra2;Palavra3..." ng-model=novoMaterial.keyWord class="form-control" rows="3" ></textarea>
+                        <textarea placeholder="Palavra1;Palavra2;Palavra3..." ng-model=novoMaterial.keyWord class="form-control" rows="3" ng-required="true" ></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2">Descrição</label>
                         <div class="col-sm-10">
-                        <textarea placeholder="Digite a descrição do material..." ng-model=novoMaterial.desc class="form-control" rows="6" ></textarea>
+                        <textarea placeholder="Digite a descrição do material..." ng-model=novoMaterial.desc class="form-control" rows="6" ng-required="true" ></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2">Formato</label>
                         <div class="col-sm-10 form-check">
-                            <input class="form-check-input" type="radio" id="link" name="linkFile" ng-model="linkFile" value="link">
+                            <input class="form-check-input" type="radio" id="link" name="linkFile" ng-model="linkFile" value="link" ng-required="true">
                             <label class="form-check-label" for="link">Link</label><br>
-                            <input class="form-check-input" type="radio" id="file" name="linkFile" ng-model="linkFile" value="file">
+                            <input class="form-check-input" type="radio" id="file" name="linkFile" ng-model="linkFile" value="file" ng-required="true">
                             <label class="form-check-label" for="file">Arquivo</label>
                         </div>
                     </div>
@@ -160,7 +160,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary"
+                            <button type="submit" class="btn btn-primary" ng-disabled="frm.$invalid"
                             ng-click="salvar()" data-dismiss="modal">Salvar</button>
                         </div>
                     </div>
