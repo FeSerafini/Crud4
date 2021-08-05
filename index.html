@@ -103,24 +103,8 @@
                         <div class="col-sm-10">
                         
                         <select class="form-control" ng-model="novoMaterial.produto" ng-required="true">
-                            <option value="">
-                            <option value="1">Rispalum®
-                            <option value="2">Rosulib
-                            <option value="3">Neotiapim
-                            <option value="4">Plagrel®
-                            <option value="5">Tegretol® / Tegretol® CR
-                            <option value="6">EXELON® PATCH
-                            <option value="7">RITALINA® LA
-                            <option value="8">RITALINA®
-                            <option value="9">STALEVO®
-                            <option value="10">TRILEPTAL®
-                            <option value="11">DIOVAN® HCT
-                            <option value="12">APRESOLINA®
-                            <option value="13">DIOVAN®
-                            <option value="14">COMTAN®
-                            <option value="15">Pidezot
-                            <option value="16">Lesdot
-                            <option value="17">Sandoz
+                            <option value="">          
+                            <option ng-repeat="produto in produtos" value="{{produto.idProduto}}">{{produto.produtoName}}</option>
                         </select>
                         </div>
                     </div>
@@ -138,24 +122,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2">Formato</label>
-                        <div class="col-sm-10 form-check">
-                            <input class="form-check-input" type="radio" id="link" name="linkFile" ng-model="linkFile" value="link" ng-required="true">
-                            <label class="form-check-label" for="link">Link</label><br>
-                            <input class="form-check-input" type="radio" id="file" name="linkFile" ng-model="linkFile" value="file" ng-required="true">
-                            <label class="form-check-label" for="file">Arquivo</label>
-                        </div>
-                    </div>
-                    <div class="form-group" ng-show="linkFile == 'file'">
-                        <label class="control-label col-sm-2">Arquivo</label>
-                        <div class="col-sm-10">
-                        <input class="form-control" type="file" ng-model="novoMaterial.arquivo">
-                        </div>
-                    </div>
-                    <div class="form-group" ng-show="linkFile == 'link'">
                         <label class="control-label col-sm-2">Link</label>
                         <div class="col-sm-10">
-                        <input class="form-control" placeholder="Digite um link..." type="url" ng-model="novoMaterial.link">
+                        <input class="form-control" placeholder="Digite um link..." type="url" ng-model="novoMaterial.link" ng-required="true">
                         </div>
                     </div>
                     <div class="form-group">
@@ -228,23 +197,7 @@
                         
                         <select class="form-control" ng-model="materialSelecionado.produto">
                             <option value="">
-                            <option value="1">Rispalum®
-                            <option value="2">Rosulib
-                            <option value="3">Neotiapim
-                            <option value="4">Plagrel®
-                            <option value="5">Tegretol® / Tegretol® CR
-                            <option value="6">EXELON® PATCH
-                            <option value="7">RITALINA® LA
-                            <option value="8">RITALINA®
-                            <option value="9">STALEVO®
-                            <option value="10">TRILEPTAL®
-                            <option value="11">DIOVAN® HCT
-                            <option value="12">APRESOLINA®
-                            <option value="13">DIOVAN®
-                            <option value="14">COMTAN®
-                            <option value="15">Pidezot
-                            <option value="16">Lesdot
-                            <option value="17">Sandoz
+                            <option ng-repeat="produto in produtos" value="{{produto.idProduto}}">{{produto.produtoName}}</option>
                         </select>
                         </div>
                     </div>
@@ -261,22 +214,7 @@
                         <textarea placeholder="Digite a descrição do material..." ng-model=materialSelecionado.desc class="form-control" rows="6" ></textarea>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-2">Formato</label>
-                        <div class="col-sm-10 form-check">
-                            <input class="form-check-input" type="radio" id="link" name="linkFile" ng-model="linkFile" value="link">
-                            <label class="form-check-label" for="link">Link</label><br>
-                            <input class="form-check-input" type="radio" id="file" name="linkFile" ng-model="linkFile" value="file">
-                            <label class="form-check-label" for="file">Arquivo</label>
-                        </div>
-                    </div>
-                    <div class="form-group" ng-show="linkFile == 'file'">
-                        <label class="control-label col-sm-2">Arquivo</label>
-                        <div class="col-sm-10">
-                        <input class="form-control" type="file" ng-model="materialSelecionado.arquivo">
-                        </div>
-                    </div>
-                    <div class="form-group" ng-show="linkFile == 'link'">
+                    <div class="form-group" >
                         <label class="control-label col-sm-2">Link</label>
                         <div class="col-sm-10">
                         <input class="form-control" placeholder="Digite um link..." type="url" ng-model="materialSelecionado.link">
