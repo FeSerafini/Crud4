@@ -4,7 +4,6 @@ crud.controller("controller", function ($scope) {
 
    $scope.novoMaterial = {};
    $scope.materialSelecionado = {};
-
    $scope.materiais = [
     {
         materialName: 'Mat1',
