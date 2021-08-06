@@ -17,9 +17,10 @@
     <h2> Listagem de Materiais </h2>
 </div>
 <div class='col-sm-4'>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Novo</button>
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Novo</button>
 </div>
 <hr>
+<br><br><br><br>
 <div class=' col-sm-offset-1 col-sm-9'>
     <table class="table table-hover">
         <thead>
@@ -76,11 +77,11 @@
                         <input class="form-check-input" type="radio" id="cvm0" ng-model="novoMaterial.linha" value="0" ng-required="true">
                         <label class="form-check-label" for="cvm0">CVM</label><br>
                         <input class="form-check-input" type="radio" id="snc1" ng-model="novoMaterial.linha" value="1" ng-required="true">
-                        <label class="form-check-label" for="cvm0">SNC</label><br>
+                        <label class="form-check-label" for="snc1">SNC</label><br>
                         <input class="form-check-input" type="radio" id="hibrido2" ng-model="novoMaterial.linha" value="2" ng-required="true">
-                        <label class="form-check-label" for="cvm0">Hibrido</label><br>
+                        <label class="form-check-label" for="hibrido2">Hibrido</label><br>
                         <input class="form-check-input" type="radio" id="institucional3" ng-model="novoMaterial.linha" value="3" ng-required="true">
-                        <label class="form-check-label" for="cvm0">Institucional</label><br> 
+                        <label class="form-check-label" for="institucional3">Institucional</label><br> 
                         </div> 
                     </div>
                     <div class="form-group">
@@ -127,15 +128,11 @@
                         <input class="form-control" placeholder="Digite um link..." type="url" ng-model="novoMaterial.link" ng-required="true">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary" ng-disabled="frm.$invalid"
-                            ng-click="salvar()" data-dismiss="modal">Salvar</button>
-                        </div>
-                    </div>
                 </form>
             </div>
             <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" ng-disabled="frm.$invalid"
+                            ng-click="salvar()" data-dismiss="modal">Salvar</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
             </div>
         </div>
@@ -220,16 +217,11 @@
                         <input class="form-control" placeholder="Digite um link..." type="url" ng-model="materialSelecionado.link">
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary"
-                            ng-click="alterarMaterial()" data-dismiss="modal">Salvar</button>
-                        </div>
-                    </div>
                 </form>
             </div>
             <div class="modal-footer">
+                <button type="submit" class="btn btn-primary"
+                            ng-click="alterarMaterial()" data-dismiss="modal">Salvar</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
             </div>
         </div>

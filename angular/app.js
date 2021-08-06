@@ -101,6 +101,8 @@ crud.controller("controller", function ($scope) {
         link: 'https://www.w3schools.com/angular/angular_intro.asp'
     },
    ];
+   $
+  
 
    $scope.salvar = function () {
        $scope.materiais.push($scope.novoMaterial);
