@@ -3,7 +3,7 @@
 Instruções para uso:
 -
 
-- Fazer git clone do folder Crud4
+- Fazer git clone do folder Crud4 na branch master.
 
 - Abrir index.html no navegador (recomendado usar plug-in "Live Server" disponivel no Visual Studio Code.
 
