@@ -59,17 +59,18 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="close" data-dismiss="modal" ng-click="reset()">&times;</button>
                 <h4 class="modal-title">Novo Material</h4>
             </div>
             <div class="modal-body">
-                <form name="frm" class="form-horizontal needs-validation" role="form" novalidate>
+                <form name="frm" id="frm" class="form-horizontal needs-validation" role="form" novalidate>
                     <div class="form-group">
                         <label class="control-label col-sm-2">Material</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="Nome do Material..."
+                            <input name="namei" type="text" class="form-control" placeholder="Nome do Material..."
                             ng-model="novoMaterial.materialName" ng-required="true">
                         </div>
+                        <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm.namei.$invalid && (frm.namei.$dirty || frm.namei.$touched)">Nome invalido.</span>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2">Linha</label>
@@ -88,7 +89,7 @@
                         <label class="control-label col-sm-2">Tipo</label>
                         <div class="col-sm-10">
                         
-                        <select class="form-control" ng-model="novoMaterial.tipo" ng-required="true">
+                        <select name="tipo" class="form-control" ng-model="novoMaterial.tipo" ng-required="true">
                             <option value="">
                             <option value="0">Material Técnico
                             <option value="1">Podcast
@@ -97,43 +98,47 @@
                             <option value="4">Sandoz Talks
                         </select>
                         </div>
-                        
+                        <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm.tipo.$invalid && (frm.tipo.$dirty || frm.tipo.$touched)">Escolha um tipo.</span>
                     </div> 
                     <div class="form-group">
                         <label class="control-label col-sm-2">Produto</label>
                         <div class="col-sm-10">
                         
-                        <select class="form-control" ng-model="novoMaterial.produto" ng-required="true">
+                        <select name="produto"class="form-control" ng-model="novoMaterial.produto" ng-required="true">
                             <option value="">          
                             <option ng-repeat="produto in produtos" value="{{produto.idProduto}}">{{produto.produtoName}}</option>
                         </select>
                         </div>
+                        <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm.produto.$invalid && (frm.produto.$dirty || frm.produto.$touched)">Escolha um produto.</span>
                     </div>
                    
                     <div class="form-group">
                         <label class="control-label col-sm-2">Palavras-Chave</label>
                         <div class="col-sm-10">
-                        <textarea placeholder="Palavra1;Palavra2;Palavra3..." ng-model=novoMaterial.keyWord class="form-control" rows="3" ng-required="true" ></textarea>
+                        <textarea name="keywords"placeholder="Palavra1;Palavra2;Palavra3..." ng-model=novoMaterial.keyWord class="form-control" rows="3" ng-required="true" ></textarea>
                         </div>
+                        <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm.keywords.$invalid && (frm.keywords.$dirty || frm.keywords.$touched)">Palavras passe invalidas.</span>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2">Descrição</label>
                         <div class="col-sm-10">
-                        <textarea placeholder="Digite a descrição do material..." ng-model=novoMaterial.desc class="form-control" rows="6" ng-required="true" ></textarea>
+                        <textarea name="descri" placeholder="Digite a descrição do material..." ng-model=novoMaterial.desc class="form-control" rows="6" ng-required="true" ></textarea>
                         </div>
+                        <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm.descri.$invalid && (frm.descri.$dirty || frm.descri.$touched)">Descrição invalida.</span>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2">Link</label>
+                        <label class="control-label col-sm-2" >Link</label>
                         <div class="col-sm-10">
-                        <input class="form-control" placeholder="Digite um link..." type="url" ng-model="novoMaterial.link" ng-required="true">
+                        <input name="link" type="url" class="form-control" placeholder="Digite um link..."  ng-model="novoMaterial.link" ng-required="true">
                         </div>
+                        <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm.link.$invalid && (frm.link.$dirty || frm.link.$touched)">Link invalido.</span>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" ng-disabled="frm.$invalid"
                             ng-click="salvar()" data-dismiss="modal">Salvar</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="reset()">Fechar</button>
             </div>
         </div>
 

@@ -80,34 +80,49 @@ crud.controller("controller", function ($scope) {
         produto: '16',
         keyWord: 'ansiedade;neurologia;psiquiatria;',
         desc: 'Eficacia e tolerabilidade de escilatopram',
-        link: 'https://www.w3schools.com/angular/angular_intro.asp'
+        link: 'https://www.uol.com.br/vivabem/noticias/redacao/2018/07/17/ansiedade-o-que-e-quais-os-tipos-os-sintomas-e-tratamentos-mais-eficazes.htm',
     },
     {
-        materialName: 'Mat2',
-        linha: '2',
-        tipo: '1',
-        produto: '6',
-        keyWord: 'ke1;key2;',
-        desc: 'Descrição 1',
-        link: 'https://www.w3schools.com/angular/angular_intro.asp'
+        materialName: 'Paciente em foco',
+        linha: '1',
+        tipo: '0',
+        produto: '1',
+        keyWord: 'paciente em foco;neurologia;',
+        desc: 'Estágio inicial da esquizofrenia',
+        link: 'https://saude.abril.com.br/mente-saudavel/o-que-e-esquizofrenia-sintomas-diagnostico-e-tratamento/',
     },
     {   
-        materialName: 'Mat3',
-        linha: '3',
-        tipo: '1',
-        produto: '6',
-        keyWord: 'ke1;key2;',
-        desc: 'Descrição 1',
-        link: 'https://www.w3schools.com/angular/angular_intro.asp'
+        materialName: 'Score de Framingham',
+        linha: '0',
+        tipo: '2',
+        produto: '4',
+        keyWord: 'cardiologia;',
+        desc: 'Utilize para avaliar o risco de doença cardiovascular',
+        link: 'https://www.rededorsaoluiz.com.br/especialidades/cardiologia',
+    },
+    {   
+        materialName: 'Classificação Disturbius do Sono',
+        linha: '0',
+        tipo: '2',
+        produto: '15',
+        keyWord: 'insonia;cardiologia;neurologia;',
+        desc: 'Utilize para avaliar o risco de doença cardiovascular',
+        link: 'https://bvsms.saude.gov.br/disturbios-do-sono/',
     },
    ];
-   $
+   
   
 
    $scope.salvar = function () {
        $scope.materiais.push($scope.novoMaterial);
        $scope.novoMaterial = {};
    };
+   
+  $scope.reset = function() {
+    $scope.novoMaterial = {};
+    $scope.frm.$setPristine();
+    $scope.frm.$setUntouched();
+  }
 
    $scope.selecionaMaterial = function (material) {
         $scope.materialSelecionado = material;
