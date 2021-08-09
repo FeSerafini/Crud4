@@ -1,18 +1,32 @@
 # Crud4
-Crud básico usando html, angular js e bootstrap.
-Recomendado rodar em Live Server
 
--Funcionalidades-
+Instruções para uso:
+-
 
-Adicionar, editar e excluir "materiais" de uma array local (ainda sera integrado em um banco de dados).
+- Fazer git clone do folder CrudV4
 
-Validação que não permite submit caso o form não seja devidamente preenchido.
+- Abrir index.html no navegador (recomendado usar plug-in "Live Server" disponivel no Visual Studio Code.
 
-É responsivo.
 
-Possuí confirmação ao deletar um material.
+Introdução
+-
 
--A ser implementado-
 
-Ordenar items da tabela
+Crud básico feito usando html, angularjs e bootstrap com o próposito de aprendizado e prova de conceito para possível estágio.
+
+Funcionalidade já implementadas 
+-
+- Listagem de materiais que apresenta nome e valore numéricos referentes a linha, tipo e produto.
+- Botão "Novo" que abre o form "Novo Material" no qual o usuário pode adicionar items à lista.
+- Botão "Editar" que abre o form "Editar Material" no qual o usuário recebe todas as informações do material escolhido e pode altera-las.
+- Botão "Excluir" que abre uma modal de confirmação que apresenta o nome do material que o usuário deseja excluir e um botão para prosseguir em apagar o material ou cancelar a operação.
+- Ao fechar o form  "Novo Material" sem salvar, todas os campos preenchidos são esvaziados e retornados ao estado de prestine e untouched.
+- Os form fazem validação e não permitem o submit(Salvar) caso os campos não estejam devidamente preenchidos.
+- Dropdown de produtos é populado por uma array.
+- A população da lista é feita por uma array que substitui o banco de dados por enquanto.
+
+Funcionalidades em desenvolvimento
+-
+- Integração com o banco de dados.
+- Display de linha, tipo e produto ser pelo nome.
 
