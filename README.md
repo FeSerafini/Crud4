@@ -11,3 +11,8 @@ Validação que não permite submit caso o form não seja devidamente preenchido
 É responsivo.
 
 Possuí confirmação ao deletar um material.
+
+-A ser implementado-
+
+Ordenar items da tabela
+
