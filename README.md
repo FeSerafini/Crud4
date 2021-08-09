@@ -28,5 +28,5 @@ Funcionalidade já implementadas
 Funcionalidades em desenvolvimento
 -
 - Integração com o banco de dados.
-- Display de linha, tipo e produto ser pelo nome.
+- Display de linha, tipo e produto pelo nome.
 
