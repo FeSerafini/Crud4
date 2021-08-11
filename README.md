@@ -24,9 +24,10 @@ Funcionalidade já implementadas
 - Os form fazem validação e não permitem o submit(Salvar) caso os campos não estejam devidamente preenchidos.
 - Dropdown de produtos é populado por uma array.
 - A população da lista é feita por uma array que substitui o banco de dados por enquanto.
+- Display de linha, tipo e produto pelo nome.
 
 Funcionalidades em desenvolvimento
 -
 - Integração com o banco de dados.
-- Display de linha, tipo e produto pelo nome.
+- Arrumar botão editar. (desativar two way binding)
 
