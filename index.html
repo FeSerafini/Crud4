@@ -78,6 +78,8 @@
                             <select name="linha" class="form-control" ng-model="novoMaterial.linha" ng-required="true"
                             ng-options="linha.linhaName for linha in linhas">
                             <option value="">Selecione uma linha...</option>
+                            
+                        
                         </select>
                         </div> 
                         <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm1.linha.$invalid && (frm1.linha.$dirty || frm1.linha.$touched)">Escolha uma linha.</span>
@@ -145,7 +147,7 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="close" ng-click="resete()"data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Editar Material</h4>
             </div>
             <div class="modal-body">
@@ -155,16 +157,16 @@
                         <label class="control-label col-sm-2">Material</label>
                         <div class="col-sm-10">
                             <input name="namei"type="text" class="form-control" placeholder="Nome do Material..."
-                            ng-model="materialSelecionado.materialName" ng-required="true">
+                            ng-model="edit.materialName" ng-required="true">
                         </div>
                         <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm2.namei.$invalid && (frm2.namei.$dirty || frm2.namei.$touched)">Nome invalido.</span>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2">Linha</label>
                         <div class="col-sm-10">
-                            <select name="linha" class="form-control" ng-model="materialSelecionado.linha" ng-required="true"
+                            <select name="linha" class="form-control" ng-model="edit.linha" ng-required="true"
                             ng-options="linha.linhaName for linha in linhas">
-                            <option value="">Selecione uma linha...</option>
+                            <option value="">{{edit.linha.linhaName}}</option>
                         </select>
                         </div> 
                         <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm1.linha.$invalid && (frm1.linha.$dirty || frm1.linha.$touched)">Escolha uma linha.</span>
@@ -173,10 +175,11 @@
                         <label class="control-label col-sm-2">Tipo</label>
                         <div class="col-sm-10">
                         
-                        <select name="tipo" class="form-control" ng-model="materialSelecionado.tipo" ng-required="true"
+                        <select name="tipo" class="form-control" ng-model="edit.tipo" ng-required="true"
                         ng-options="tipo.tipoName for tipo in tipos">
-                        <option value="">Selecione um tipo...</option>
+                        <option value="">{{edit.tipo.tipoName}}</option>
                         </select>
+                        
                     </div>
                         <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm2.tipo.$invalid && (frm2.tipo.$dirty || frm2.tipo.$touched)">Escolha um tipo.</span>
                         
@@ -185,8 +188,8 @@
                         <label class="control-label col-sm-2">Produto</label>
                         <div class="col-sm-10">
                         
-                            <select name="produto"class="form-control" ng-model="materialSelecionado.produto" ng-required="true" ng-options="produto.produtoName for produto in produtos">
-                                <option value="">Selecione um produto...</option>       
+                            <select name="produto"class="form-control" ng-model="edit.produto" ng-required="true" ng-options="produto.produtoName for produto in produtos">
+                                <option value="">{{edit.produto.produtoName}}</option>       
                             </select>
                         </div>
                         <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm2.produto.$invalid && (frm2.produto.$dirty || frm2.produto.$touched)">Escolha um produto.</span>
@@ -195,30 +198,31 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2">Palavras-Chave</label>
                         <div class="col-sm-10">
-                        <textarea ng-required="true" name="keywords" placeholder="Palavra1;Palavra2;Palavra3..." ng-model=materialSelecionado.keyWord class="form-control" rows="3" ></textarea>
+                        <textarea ng-required="true" name="keywords" placeholder="Palavra1;Palavra2;Palavra3..." ng-model=edit.keyWord class="form-control" rows="3" ></textarea>
                         </div>
                         <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm2.keywords.$invalid && (frm2.keywords.$dirty || frm2.keywords.$touched)">Palavras passe invalidas.</span>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2">Descrição</label>
                         <div class="col-sm-10">
-                        <textarea ng-required="true" name="descri"placeholder="Digite a descrição do material..." ng-model=materialSelecionado.desc class="form-control" rows="6" ></textarea>
+                        <textarea ng-required="true" name="descri"placeholder="Digite a descrição do material..." ng-model=edit.desc class="form-control" rows="6" ></textarea>
                         </div>
                         <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm2.descri.$invalid && (frm2.descri.$dirty || frm2.descri.$touched)">Descrição invalida.</span>
                     </div>
                     <div class="form-group" >
                         <label class="control-label col-sm-2">Link</label>
                         <div class="col-sm-10">
-                        <input ng-required="true" name="link"class="form-control" placeholder="Digite um link..." type="url" ng-model="materialSelecionado.link">
+                        <input ng-required="true" name="link"class="form-control" placeholder="Digite um link..." type="url" ng-model="edit.link">
                         </div>
                         <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm2.link.$invalid && (frm2.link.$dirty || frm2.link.$touched)">Link invalido.</span>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
+                <button ng-click="resete()" type="button" class="btn btn-primary" >Reset</button>
                 <button type="submit" class="btn btn-primary"
-                            ng-click="alterarMaterial()" data-dismiss="modal">Salvar</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                            ng-click="update(edit)" data-dismiss="modal">Salvar</button>
+                <button ng-click="resete()" type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
             </div>
         </div>
 

@@ -124,6 +124,19 @@ crud.controller("controller", function ($scope) {
             link: 'https://bvsms.saude.gov.br/disturbios-do-sono/',
         },
        ];
+       $scope.selecionaMaterial = function (material) {
+        $scope.materialSelecionado = material;
+        $scope.edit = angular.copy($scope.materialSelecionado);
+   };
+       $scope.resete = function() {
+        // Example with 1 argument
+        $scope.edit = angular.copy($scope.materialSelecionado);
+      };
+  
+      $scope.update = function(edit) {
+        // Example with 2 arguments
+        angular.copy(edit, $scope.materialSelecionado);
+      };
    
   
 
@@ -139,9 +152,7 @@ crud.controller("controller", function ($scope) {
   };
   
 
-   $scope.selecionaMaterial = function (material) {
-        $scope.materialSelecionado = material;
-   };
+   
 
    $scope.alterarMaterial = function () {
    };
