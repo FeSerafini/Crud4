@@ -29,5 +29,4 @@ Funcionalidade já implementadas
 Funcionalidades em desenvolvimento
 -
 - Integração com o banco de dados.
-- Arrumar botão editar. (desativar two way binding)
 
