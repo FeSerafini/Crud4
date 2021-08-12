@@ -29,4 +29,5 @@ Funcionalidade já implementadas
 Funcionalidades em desenvolvimento
 -
 - Integração com o banco de dados.
+- Ordenação
 
