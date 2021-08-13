@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Gerenciamento de Materiais</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="angular/angular.min.js"></script>
     <script src="angular/app.js"></script>
+
 </head>
 
 
@@ -17,7 +19,7 @@
     <h2> Listagem de Materiais </h2>
 </div>
 <div class='col-sm-4'>
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Novo</button>
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" ng-click="novoId()">Novo</button>
 </div>
 <hr>
 <br><br><br><br>
@@ -25,6 +27,7 @@
     <table class="table table-hover">
         <thead>
         <tr>
+            <th style="border: 0px;">ID</th>
             <th style="border: 0px;">Nome do Material</th>
             <th style="border: 0px;">Linha</th>
             <th style="border: 0px;">Tipo</th>
@@ -34,18 +37,24 @@
 
         <tbody>
         <tr ng-repeat="material in materiais">
-            <td>{{material.materialName}}</td>
-            <td>{{material.linha.linhaName}}</td>
-            <td>{{material.tipo.tipoName}}</td>
-            <td>{{material.produto.produtoName}}</td>
+            <td>{{material.Id}}</td>
+            <td>{{material.Material}}</td>
+            <td>{{material.Linha}}</td>
+            <td>{{material.Tipo}}</td>
+            <td>{{material.IdProduto}}</td>
             <td>
-                <button type="button" class="btn btn-warning" data-toggle="modal"
+                <button type="button" class="btn btn-warning" data-toggle="modal" data-backdrop="static" data-keyboard="false"
                         data-target="#myModalEditar" ng-click="selecionaMaterial(material)">Editar</button>
             </td>
             <td>
-                <button type="button" class="btn btn-danger" data-toggle="modal"
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-backdrop="static" data-keyboard="false"
                         data-target="#myModalExcluir" ng-click="selecionaMaterial(material)">Excluir</button>
             </td>
+            <td>
+            <button type="button" class="btn"><i class="bi bi-caret-up-fill"></i>
+            </button>
+            1
+            <button type="button" class="btn"><i class="bi bi-caret-down-fill"></i></button></td>
         </tr>
         </tbody>
     </table>
@@ -60,7 +69,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" ng-click="reset()">&times;</button>
-                <h4 class="modal-title">Novo Material</h4>
+                <h4 class="modal-title">Novo Material Id={{novoMaterial.Id}}</h4>
             </div>
             <div class="modal-body">
                 <form name="frm1" id="frm1" class="form-horizontal needs-validation" role="form" novalidate>
@@ -68,15 +77,15 @@
                         <label class="control-label col-sm-2">Material</label>
                         <div class="col-sm-10">
                             <input name="namei" type="text" class="form-control" placeholder="Nome do Material..."
-                            ng-model="novoMaterial.materialName" ng-required="true">
+                            ng-model="novoMaterial.Material" ng-required="true">
                         </div>
                         <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm1.namei.$invalid && (frm1.namei.$dirty || frm1.namei.$touched)">Nome invalido.</span>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2">Linha</label>
                         <div class="col-sm-10">
-                            <select name="linha" class="form-control" ng-model="novoMaterial.linha" ng-required="true"
-                            ng-options="linha.linhaName for linha in linhas">
+                            <select name="linha" class="form-control" ng-model="novoMaterial.Linha" ng-required="true"
+                            ng-options="linha.Id as linha.Nome for linha in linhas">
                             <option value="">Selecione uma linha...</option>
                             
                         
@@ -88,8 +97,8 @@
                         <label class="control-label col-sm-2">Tipo</label>
                         <div class="col-sm-10">
                         
-                        <select name="tipo" class="form-control" ng-model="novoMaterial.tipo" ng-required="true"
-                            ng-options="tipo.tipoName for tipo in tipos">
+                        <select name="tipo" class="form-control" ng-model="novoMaterial.Tipo" ng-required="true"
+                            ng-options="tipo.Id as tipo.Nome for tipo in tipos">
                             <option value="">Selecione um tipo...</option>
                         </select>
                         </div>
@@ -99,7 +108,7 @@
                         <label class="control-label col-sm-2">Produto</label>
                         <div class="col-sm-10">
                         
-                        <select name="produto"class="form-control" ng-model="novoMaterial.produto" ng-required="true" ng-options="produto.produtoName for produto in produtos">
+                        <select name="produto"class="form-control" ng-model="novoMaterial.IdProduto" ng-required="true" ng-options="produto.Id as produto.Nome for produto in produtos">
                             <option value="">Selecione um produto...</option>         
                         </select>
                         </div>
@@ -109,21 +118,21 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2">Palavras-Chave</label>
                         <div class="col-sm-10">
-                        <textarea name="keywords"placeholder="Palavra1;Palavra2;Palavra3..." ng-model=novoMaterial.keyWord class="form-control" rows="3" ng-required="true" ></textarea>
+                        <textarea name="keywords"placeholder="Palavra1;Palavra2;Palavra3..." ng-model=novoMaterial.PalavrasChave class="form-control" rows="3" ng-required="true" ></textarea>
                         </div>
                         <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm1.keywords.$invalid && (frm1.keywords.$dirty || frm1.keywords.$touched)">Palavras passe invalidas.</span>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2">Descrição</label>
                         <div class="col-sm-10">
-                        <textarea name="descri" placeholder="Digite a descrição do material..." ng-model=novoMaterial.desc class="form-control" rows="6" ng-required="true" ></textarea>
+                        <textarea name="descri" placeholder="Digite a descrição do material..." ng-model=novoMaterial.Descricao class="form-control" rows="6" ng-required="true" ></textarea>
                         </div>
                         <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm1.descri.$invalid && (frm1.descri.$dirty || frm1.descri.$touched)">Descrição invalida.</span>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" >Link</label>
                         <div class="col-sm-10">
-                        <input name="link" type="text" class="form-control" placeholder="Digite um link..."  ng-model="novoMaterial.link" ng-required="true">
+                        <input name="link" type="text" class="form-control" placeholder="Digite um link..."  ng-model="novoMaterial.Link" ng-required="true">
                         </div>
                         <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm1.link.$invalid && (frm1.link.$dirty || frm1.link.$touched)">Link invalido.</span>
                     </div>
@@ -131,7 +140,7 @@
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary"  ng-disabled="frm1.$invalid"
-                            ng-click="salvar(); reset();" > Salvar</button>
+                            ng-click="salvar(); reset(); novoId()" > Salvar</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="reset()">Fechar</button>
             </div>
         </div>
@@ -148,7 +157,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" ng-click="resete()"data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Editar Material</h4>
+                <h4 class="modal-title">Editar Material Id={{edit.Id}}</h4>
             </div>
             <div class="modal-body">
                 <form name="frm2" id="frm2" class="form-horizontal needs-validation" role="form" novalidate>
@@ -157,16 +166,16 @@
                         <label class="control-label col-sm-2">Material</label>
                         <div class="col-sm-10">
                             <input name="namei"type="text" class="form-control" placeholder="Nome do Material..."
-                            ng-model="edit.materialName" ng-required="true">
+                            ng-model="edit.Material" ng-required="true">
                         </div>
                         <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm2.namei.$invalid && (frm2.namei.$dirty || frm2.namei.$touched)">Nome invalido.</span>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2">Linha</label>
                         <div class="col-sm-10">
-                            <select name="linha" class="form-control" ng-model="edit.linha" ng-required="true"
-                            ng-options="linha.linhaName for linha in linhas">
-                            <option value="">{{edit.linha.linhaName}}</option>
+                            <select name="linha" class="form-control" ng-model="edit.Linha" ng-required="true"
+                            ng-options="linha.Id as linha.Nome for linha in linhas">
+                            <option value=""></option>
                         </select>
                         </div> 
                         <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm1.linha.$invalid && (frm1.linha.$dirty || frm1.linha.$touched)">Escolha uma linha.</span>
@@ -175,9 +184,9 @@
                         <label class="control-label col-sm-2">Tipo</label>
                         <div class="col-sm-10">
                         
-                        <select name="tipo" class="form-control" ng-model="edit.tipo" ng-required="true"
-                        ng-options="tipo.tipoName for tipo in tipos">
-                        <option value="">{{edit.tipo.tipoName}}</option>
+                        <select name="tipo" class="form-control" ng-model="edit.Tipo" ng-required="true"
+                        ng-options="tipo.Id as tipo.Nome for tipo in tipos">
+                        <option value=""></option>
                         </select>
                         
                     </div>
@@ -188,8 +197,8 @@
                         <label class="control-label col-sm-2">Produto</label>
                         <div class="col-sm-10">
                         
-                            <select name="produto"class="form-control" ng-model="edit.produto" ng-required="true" ng-options="produto.produtoName for produto in produtos">
-                                <option value="">{{edit.produto.produtoName}}</option>       
+                            <select name="produto"class="form-control" ng-model="edit.IdProduto" ng-required="true" ng-options="produto.Id as produto.Nome for produto in produtos">
+                                <option value=""></option>       
                             </select>
                         </div>
                         <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm2.produto.$invalid && (frm2.produto.$dirty || frm2.produto.$touched)">Escolha um produto.</span>
@@ -198,21 +207,21 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2">Palavras-Chave</label>
                         <div class="col-sm-10">
-                        <textarea ng-required="true" name="keywords" placeholder="Palavra1;Palavra2;Palavra3..." ng-model=edit.keyWord class="form-control" rows="3" ></textarea>
+                        <textarea ng-required="true" name="keywords" placeholder="Palavra1;Palavra2;Palavra3..." ng-model=edit.PalavrasChave class="form-control" rows="3" ></textarea>
                         </div>
                         <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm2.keywords.$invalid && (frm2.keywords.$dirty || frm2.keywords.$touched)">Palavras passe invalidas.</span>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2">Descrição</label>
                         <div class="col-sm-10">
-                        <textarea ng-required="true" name="descri"placeholder="Digite a descrição do material..." ng-model=edit.desc class="form-control" rows="6" ></textarea>
+                        <textarea ng-required="true" name="descri"placeholder="Digite a descrição do material..." ng-model=edit.Descricao class="form-control" rows="6" ></textarea>
                         </div>
                         <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm2.descri.$invalid && (frm2.descri.$dirty || frm2.descri.$touched)">Descrição invalida.</span>
                     </div>
                     <div class="form-group" >
                         <label class="control-label col-sm-2">Link</label>
                         <div class="col-sm-10">
-                        <input ng-required="true" name="link"class="form-control" placeholder="Digite um link..." type="url" ng-model="edit.link">
+                        <input ng-required="true" name="link"class="form-control" placeholder="Digite um link..." type="url" ng-model="edit.Link">
                         </div>
                         <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm2.link.$invalid && (frm2.link.$dirty || frm2.link.$touched)">Link invalido.</span>
                     </div>
@@ -221,8 +230,8 @@
             <div class="modal-footer">
                 <button ng-click="resete()" type="button" class="btn btn-primary" >Desfazer</button>
                 <button type="submit" class="btn btn-primary"
-                            ng-click="update(edit)" data-dismiss="modal">Salvar</button>
-                <button ng-click="resete()" type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                            ng-click="update(edit)" data-dismiss="modal" >Salvar</button>
+                <button ng-click="resete()" type="button" class="btn btn-default" data-dismiss="modal" >Fechar</button>
             </div>
         </div>
 
@@ -241,7 +250,7 @@
                 <h4 class="modal-title">Você tem certeza?</h4>
             </div>
             <div class="modal-body">
-                <h4 style="font-weight: bolder"> Você vai excluir {{materialSelecionado.materialName}}</h4>
+                <h4 style="font-weight: bolder"> Você vai excluir {{materialSelecionado.Material}}</h4>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal"
