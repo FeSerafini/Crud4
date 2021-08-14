@@ -121,6 +121,27 @@ crud.controller("controller", function ($scope) {
    $scope.excluirMaterial = function(){
     $scope.materiais.splice($scope.materiais.indexOf($scope.materialSelecionado), 1);};
 
-    
+    //Exibir o nome da linha na tabela.
+   $scope.displayLinha = function(dLinha){
+    for (let index = 0; index < $scope.linhas.length; index++) {
+        if ($scope.linhas[index].Id == dLinha) {
+        return $scope.linhas[index].Nome;}}
+    return "Linha não Encontrada"
+    }
 
+    //Exibir o nome do tipo na tabela.
+   $scope.displayTipo = function(dTipo){
+    for (let index = 0; index < $scope.tipos.length; index++) {
+        if ($scope.tipos[index].Id == dTipo) {
+        return $scope.tipos[index].Nome;}}
+    return "Tipo não Encontrado"
+    }
+    
+    //Exibir o nome do produto na tabela.
+   $scope.displayProduto = function(dProduto){
+    for (let index = 0; index < $scope.produtos.length; index++) {
+        if ($scope.produtos[index].Id == dProduto) {
+        return $scope.produtos[index].Nome;}}
+    return "Produto não Encontrado"
+    } 
 }); 

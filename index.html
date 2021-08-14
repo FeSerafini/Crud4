@@ -39,9 +39,9 @@
         <tr ng-repeat="material in materiais">
             <td>{{material.Id}}</td>
             <td>{{material.Material}}</td>
-            <td>{{material.Linha}}</td>
-            <td>{{material.Tipo}}</td>
-            <td>{{material.IdProduto}}</td>
+            <td>{{displayLinha(material.Linha)}}</td>
+            <td>{{displayTipo(material.Tipo)}}</td>
+            <td>{{displayProduto(material.IdProduto)}}</td>
             <td>
                 <button type="button" class="btn btn-warning" data-toggle="modal" data-backdrop="static" data-keyboard="false"
                         data-target="#myModalEditar" ng-click="selecionaMaterial(material)">Editar</button>
@@ -51,8 +51,7 @@
                         data-target="#myModalExcluir" ng-click="selecionaMaterial(material)">Excluir</button>
             </td>
             <td>
-            <button type="button" class="btn"><i class="bi bi-caret-up-fill"></i>
-            </button>
+            <button type="button" class="btn"><i class="bi bi-caret-up-fill"></i></button>
             1
             <button type="button" class="btn"><i class="bi bi-caret-down-fill"></i></button></td>
         </tr>
