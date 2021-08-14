@@ -29,5 +29,6 @@ Funcionalidade já implementadas
 Funcionalidades em desenvolvimento
 -
 - Integração com o banco de dados.
-- Ordenação
+- Ordenação dos elementos usando setas e um botão para aplicar alterações.
+- Arrumar sistema de Id (o id é feito baseado no comprimento da lista então isso pode acarretar em 2 elementos terem o mesmo id)
 
