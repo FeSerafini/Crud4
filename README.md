@@ -14,7 +14,7 @@ Introdução
 -
 
 
-Crud básico feito usando html, angularjs e bootstrap com o próposito de aprendizado e prova de conceito para possível estágio.
+Crud básico feito usando html, AngularJS e Bootstrap com o próposito de aprendizado e prova de conceito para possível estágio.
 
 Funcionalidade já implementadas 
 -
