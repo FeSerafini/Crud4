@@ -7,7 +7,7 @@ Instruções para uso:
 
 - Abrir index.html no navegador (recomendado usar plug-in "Live Server" disponivel no Visual Studio Code.
 
-*Comentários sobre funcionalidades e operações feitas foram adicionados no controller App.Js.
+*Comentários sobre funcionalidades e operações feitas foram adicionados no controller App.Js.*
 
 
 Introdução
