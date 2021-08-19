@@ -33,5 +33,5 @@ Funcionalidades em desenvolvimento
 -
 - Integração com o banco de dados.
 - Arrumar bugs de ordenação.
-- Arrumar sistema de Id (o id é feito baseado no comprimento da lista então isso pode acarretar em 2 elementos terem o mesmo id)
+- Adicionar funcionalidade de corrigir Id e ordem no Excluir.
 
