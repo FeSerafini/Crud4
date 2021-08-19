@@ -27,10 +27,11 @@ Funcionalidade já implementadas
 - Dropdown de produtos é populado por uma array.
 - A população da lista é feita por uma array que substitui o banco de dados por enquanto.
 - Display de linha, tipo e produto pelo nome.
+- Ordenação dos elementos usando setas e um botão para aplicar alterações.
 
 Funcionalidades em desenvolvimento
 -
 - Integração com o banco de dados.
-- Ordenação dos elementos usando setas e um botão para aplicar alterações.
+- Arrumar bugs de ordenação.
 - Arrumar sistema de Id (o id é feito baseado no comprimento da lista então isso pode acarretar em 2 elementos terem o mesmo id)
 
