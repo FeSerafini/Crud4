@@ -20,6 +20,7 @@
 </div>
 <div class='col-sm-4'>
     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" ng-click="novoId()">Novo</button>
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" ng-click="selecionarMateriais(materiais)"data-target="#myModalOrdenar" data-backdrop="static" data-keyboard="false"  >Ordenar</button>
 </div>
 <hr>
 <br><br><br><br>
@@ -36,7 +37,7 @@
         </thead>
 
         <tbody>
-        <tr ng-repeat="material in materiais">
+        <tr ng-repeat="material in materiais | orderBy : 'Ordem'">
             <td>{{material.Id}}</td>
             <td>{{material.Material}}</td>
             <td>{{displayLinha(material.Linha)}}</td>
@@ -50,10 +51,6 @@
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-backdrop="static" data-keyboard="false"
                         data-target="#myModalExcluir" ng-click="selecionaMaterial(material)">Excluir</button>
             </td>
-            <td>
-            <button type="button" class="btn"><i class="bi bi-caret-up-fill"></i></button>
-            1
-            <button type="button" class="btn"><i class="bi bi-caret-down-fill"></i></button></td>
         </tr>
         </tbody>
     </table>
@@ -156,7 +153,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" ng-click="resete()"data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Editar Material Id={{edit.Id}}</h4>
+                <h4 class="modal-title">Editar Material Id={{editCopy.Id}}</h4>
             </div>
             <div class="modal-body">
                 <form name="frm2" id="frm2" class="form-horizontal needs-validation" role="form" novalidate>
@@ -165,14 +162,14 @@
                         <label class="control-label col-sm-2">Material</label>
                         <div class="col-sm-10">
                             <input name="namei"type="text" class="form-control" placeholder="Nome do Material..."
-                            ng-model="edit.Material" ng-required="true">
+                            ng-model="editCopy.Material" ng-required="true">
                         </div>
                         <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm2.namei.$invalid && (frm2.namei.$dirty || frm2.namei.$touched)">Nome invalido.</span>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2">Linha</label>
                         <div class="col-sm-10">
-                            <select name="linha" class="form-control" ng-model="edit.Linha" ng-required="true"
+                            <select name="linha" class="form-control" ng-model="editCopy.Linha" ng-required="true"
                             ng-options="linha.Id as linha.Nome for linha in linhas">
                             <option value=""></option>
                         </select>
@@ -183,7 +180,7 @@
                         <label class="control-label col-sm-2">Tipo</label>
                         <div class="col-sm-10">
                         
-                        <select name="tipo" class="form-control" ng-model="edit.Tipo" ng-required="true"
+                        <select name="tipo" class="form-control" ng-model="editCopy.Tipo" ng-required="true"
                         ng-options="tipo.Id as tipo.Nome for tipo in tipos">
                         <option value=""></option>
                         </select>
@@ -196,7 +193,7 @@
                         <label class="control-label col-sm-2">Produto</label>
                         <div class="col-sm-10">
                         
-                            <select name="produto"class="form-control" ng-model="edit.IdProduto" ng-required="true" ng-options="produto.Id as produto.Nome for produto in produtos">
+                            <select name="produto"class="form-control" ng-model="editCopy.IdProduto" ng-required="true" ng-options="produto.Id as produto.Nome for produto in produtos">
                                 <option value=""></option>       
                             </select>
                         </div>
@@ -206,31 +203,31 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2">Palavras-Chave</label>
                         <div class="col-sm-10">
-                        <textarea ng-required="true" name="keywords" placeholder="Palavra1;Palavra2;Palavra3..." ng-model=edit.PalavrasChave class="form-control" rows="3" ></textarea>
+                        <textarea ng-required="true" name="keywords" placeholder="Palavra1;Palavra2;Palavra3..." ng-model=editCopy.PalavrasChave class="form-control" rows="3" ></textarea>
                         </div>
                         <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm2.keywords.$invalid && (frm2.keywords.$dirty || frm2.keywords.$touched)">Palavras passe invalidas.</span>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2">Descrição</label>
                         <div class="col-sm-10">
-                        <textarea ng-required="true" name="descri"placeholder="Digite a descrição do material..." ng-model=edit.Descricao class="form-control" rows="6" ></textarea>
+                        <textarea ng-required="true" name="descri"placeholder="Digite a descrição do material..." ng-model=editCopy.Descricao class="form-control" rows="6" ></textarea>
                         </div>
                         <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm2.descri.$invalid && (frm2.descri.$dirty || frm2.descri.$touched)">Descrição invalida.</span>
                     </div>
                     <div class="form-group" >
                         <label class="control-label col-sm-2">Link</label>
                         <div class="col-sm-10">
-                        <input ng-required="true" name="link"class="form-control" placeholder="Digite um link..." type="url" ng-model="edit.Link">
+                        <input ng-required="true" name="link"class="form-control" placeholder="Digite um link..." type="url" ng-model="editCopy.Link">
                         </div>
                         <span class="control-label pull-right col-sm-4 text-danger" ng-show="frm2.link.$invalid && (frm2.link.$dirty || frm2.link.$touched)">Link invalido.</span>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button ng-click="resete()" type="button" class="btn btn-primary" >Desfazer</button>
+                <button ng-click="resetEdit()" type="button" class="btn btn-primary" >Desfazer</button>
                 <button type="submit" class="btn btn-primary"
-                            ng-click="update(edit)" data-dismiss="modal" >Salvar</button>
-                <button ng-click="resete()" type="button" class="btn btn-default" data-dismiss="modal" >Fechar</button>
+                            ng-click="updateEdit(edit)" data-dismiss="modal" >Salvar</button>
+                <button ng-click="resetEdit()" type="button" class="btn btn-default" data-dismiss="modal" >Fechar</button>
             </div>
         </div>
 
@@ -261,6 +258,47 @@
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="myModalOrdenar" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button ng-click="resetOrdem()" type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Ordenar Materiais</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th style="border: 0px;">ID</th>
+                        <th style="border: 0px;">Nome do Material</th>
+                        <th style="border: 0px;">Ordenar</th>
+                    </tr>
+                    </thead>
+            
+                    <tbody>
+                    <tr ng-repeat="material in ordemCopy | orderBy : 'Ordem'">
+                        <td>{{material.Id}}</td>
+                        <td>{{material.Material}}</td>
+                        <td>
+                        <button type="button" ng-click="selecionaMaterialSubir(material); subir()" class="btn"><i class="bi bi-caret-up-fill"></i></button>
+                        <button type="button" ng-click="selecionaMaterialDescer(material); descer()" class="btn"><i class="bi bi-caret-down-fill"></i></button></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button ng-click="resetOrdem()" type="button" class="btn btn-primary" >Desfazer</button>
+                <button type="submit" class="btn btn-primary"
+                            ng-click="updateOrdem(ordemCopy)" data-dismiss="modal" >Salvar</button>
+                <button ng-click="resetOrdem()" type="button" class="btn btn-default" data-dismiss="modal" >Fechar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 </body>
 </html>

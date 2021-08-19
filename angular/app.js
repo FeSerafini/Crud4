@@ -56,6 +56,7 @@ crud.controller("controller", function ($scope) {
      PalavrasChave: 'ansiedade;neurologia;psiquiatria;',
      Descricao: 'Eficacia e tolerabilidade de escilatopram',
      Link: 'https://www.uol.com.br/vivabem/noticias/redacao/2018/07/17/ansiedade-o-que-e-quais-os-tipos-os-sintomas-e-tratamentos-mais-eficazes.htm',
+     Ordem: 1,
     },
     {
      Id: 2,
@@ -66,6 +67,7 @@ crud.controller("controller", function ($scope) {
      PalavrasChave: 'paciente em foco;neurologia;',
      Descricao: 'Estágio inicial da esquizofrenia',
      Link: 'https://saude.abril.com.br/mente-saudavel/o-que-e-esquizofrenia-sintomas-diagnostico-e-tratamento/',
+     Ordem: 2,
     },
     { 
      Id: 3,
@@ -76,6 +78,7 @@ crud.controller("controller", function ($scope) {
      PalavrasChave: 'cardiologia;',
      Descricao: 'Utilize para avaliar o risco de doença cardiovascular',
      Link: 'https://www.rededorsaoluiz.com.br/especialidades/cardiologia',
+     Ordem: 3,
     },
     {  
      Id: 4, 
@@ -86,21 +89,60 @@ crud.controller("controller", function ($scope) {
      PalavrasChave: 'insonia;cardiologia;neurologia;',
      Descricao: 'Utilize para avaliar o risco de doença cardiovascular',
      Link: 'https://bvsms.saude.gov.br/disturbios-do-sono/',
+     Ordem: 4,
     },
     ];
      
     //Selecionar um material para edição ou para excluir.
    $scope.selecionaMaterial = function (material) {
     $scope.materialSelecionado = material;
-    $scope.edit = angular.copy($scope.materialSelecionado);};
+    $scope.editCopy = angular.copy($scope.materialSelecionado);};
+
+   $scope.selecionaMaterialSubir = function (material) {
+    $scope.materialSelecionadoSubir = material;
+    console.log($scope.materialSelecionadoSubir.Ordem);}
+    
+   $scope.selecionaMaterialDescer = function (material) {
+    $scope.materialSelecionadoDescer = material;
+    console.log($scope.materialSelecionadoDescer.Ordem);}
+
+   $scope.selecionarMateriais = function (materiais) {
+    $scope.materiaisSelecionados = materiais;
+    $scope.ordemCopy = angular.copy($scope.materiais);};
+
+   $scope.subir = function () {
+    console.log($scope.materialSelecionadoSubir.Ordem);
+    if ($scope.materialSelecionadoSubir.Ordem >= 2 ) {
+    for (let index = 0; index < $scope.ordemCopy.length; index++) {
+    if ($scope.ordemCopy[index].Ordem == $scope.materialSelecionadoSubir.Ordem - 1) 
+    {$scope.ordemCopy[index].Ordem = angular.copy($scope.ordemCopy[index].Ordem + 1);
+    $scope.materialSelecionadoSubir.Ordem = angular.copy($scope.materialSelecionadoSubir.Ordem - 1);
+     console.log($scope.ordemCopy[index].Ordem);};};};
+    return $scope.maximo = true;};
+    
+    $scope.descer = function () {
+    console.log($scope.materialSelecionadoDescer.Ordem);
+    if ($scope.materialSelecionadoDescer.Ordem <= 10 ) {
+    for (let index = 0; index < $scope.ordemCopy.length; index++) {
+    if ($scope.ordemCopy[index].Ordem == $scope.materialSelecionadoDescer.Ordem + 1) 
+    {$scope.ordemCopy[index].Ordem = angular.copy($scope.ordemCopy[index].Ordem - 1);
+    $scope.materialSelecionadoDescer.Ordem = angular.copy($scope.materialSelecionadoDescer.Ordem + 1);
+    console.log($scope.ordemCopy[index].Ordem);};};};
+    return $scope.maximo = true;};   
+
+   $scope.resetOrdem = function() {
+    $scope.ordemCopy = angular.copy($scope.materiais);};
+        
+   $scope.updateOrdem = function(ordemCopy) {
+    angular.copy(ordemCopy, $scope.materiais);};
    
     //Voltar o material para como estava antes da edição.
-   $scope.resete = function() {
-    $scope.edit = angular.copy($scope.materialSelecionado);};
+   $scope.resetEdit = function() {
+    $scope.editCopy = angular.copy($scope.materialSelecionado);};
     
     //Salvar alterções feitas no editar.
-   $scope.update = function(edit) {
-    angular.copy(edit, $scope.materialSelecionado);};
+   $scope.updateEdit = function(editCopy) {
+    angular.copy(editCopy, $scope.materialSelecionado);};
    
     //Salvar novo material.
    $scope.salvar = function () {
@@ -110,6 +152,9 @@ crud.controller("controller", function ($scope) {
     //Gera um Id para um novo material.
    $scope.novoId = function() {
     $scope.novoMaterial.Id = $scope.materiais.length + 1};
+
+   $scope.ordem = function() {
+    $scope.novoMaterial.Ordem = $scope.materiais.length + 1};
    
     //Reset para novo material.
    $scope.reset = function() {
