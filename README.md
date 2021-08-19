@@ -7,12 +7,14 @@ Instruções para uso:
 
 - Abrir index.html no navegador (recomendado usar plug-in "Live Server" disponivel no Visual Studio Code.
 
+*Comentários sobre funcionalidades e operações feitas foram adicionados no controller App.Js.*
+
 
 Introdução
 -
 
 
-Crud básico feito usando html, angularjs e bootstrap com o próposito de aprendizado e prova de conceito para possível estágio.
+Crud básico feito usando html, AngularJS e Bootstrap com o próposito de aprendizado e prova de conceito para possível estágio.
 
 Funcionalidade já implementadas 
 -
