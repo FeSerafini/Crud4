@@ -6,6 +6,8 @@ crud.controller("controller", function ($scope) {
     //Define que as arrays novoMaterial e materialSelecionado são vazias.
    $scope.novoMaterial = {};
    $scope.materialSelecionado = {};
+   $scope.materialSelecionadoSubir = {};
+   $scope.materialSelecionadoDescer = {};
    
    //Array para associar os nomes aos numeros de identificação dos Tipos.
    $scope.tipos = [
@@ -97,42 +99,51 @@ crud.controller("controller", function ($scope) {
    $scope.selecionaMaterial = function (material) {
     $scope.materialSelecionado = material;
     $scope.editCopy = angular.copy($scope.materialSelecionado);};
-
+    
+    //Reconhece o material que teve a seta para cima apertada.
    $scope.selecionaMaterialSubir = function (material) {
     $scope.materialSelecionadoSubir = material;
     console.log($scope.materialSelecionadoSubir.Ordem);}
     
+    //Reconhece o material que teve a seta para baixo apertada. 
    $scope.selecionaMaterialDescer = function (material) {
     $scope.materialSelecionadoDescer = material;
     console.log($scope.materialSelecionadoDescer.Ordem);}
 
+    //Faz uma copia da array para mexer em todos os elementos sem alterar.
    $scope.selecionarMateriais = function (materiais) {
     $scope.materiaisSelecionados = materiais;
     $scope.ordemCopy = angular.copy($scope.materiais);};
 
+    //Troca o valor Ordem com o mesmo valor de outro elemento acima e vice-versa.
    $scope.subir = function () {
     console.log($scope.materialSelecionadoSubir.Ordem);
     if ($scope.materialSelecionadoSubir.Ordem >= 2 ) {
     for (let index = 0; index < $scope.ordemCopy.length; index++) {
     if ($scope.ordemCopy[index].Ordem == $scope.materialSelecionadoSubir.Ordem - 1) 
-    {$scope.ordemCopy[index].Ordem = angular.copy($scope.ordemCopy[index].Ordem + 1);
-    $scope.materialSelecionadoSubir.Ordem = angular.copy($scope.materialSelecionadoSubir.Ordem - 1);
-     console.log($scope.ordemCopy[index].Ordem);};};};
-    return $scope.maximo = true;};
+    {$scope.OrdemAcima = angular.copy($scope.ordemCopy[index].Ordem);
+    $scope.OrdemAtual = angular.copy($scope.materialSelecionadoSubir.Ordem);
+    $scope.ordemCopy[index].Ordem = angular.copy($scope.OrdemAtual);
+    $scope.materialSelecionadoSubir.Ordem = angular.copy($scope.OrdemAcima);
+    console.log($scope.ordemCopy[index].Ordem);};};};};
     
-    $scope.descer = function () {
+     //Troca o valor Ordem com o mesmo valor de outro elemento abaixo e vice-versa.
+   $scope.descer = function () {
     console.log($scope.materialSelecionadoDescer.Ordem);
     if ($scope.materialSelecionadoDescer.Ordem <= 10 ) {
     for (let index = 0; index < $scope.ordemCopy.length; index++) {
     if ($scope.ordemCopy[index].Ordem == $scope.materialSelecionadoDescer.Ordem + 1) 
-    {$scope.ordemCopy[index].Ordem = angular.copy($scope.ordemCopy[index].Ordem - 1);
-    $scope.materialSelecionadoDescer.Ordem = angular.copy($scope.materialSelecionadoDescer.Ordem + 1);
-    console.log($scope.ordemCopy[index].Ordem);};};};
-    return $scope.maximo = true;};   
+    {$scope.OrdemAbaixo = angular.copy($scope.ordemCopy[index].Ordem);
+    $scope.OrdemAtual = angular.copy($scope.materialSelecionadoDescer.Ordem);
+    $scope.ordemCopy[index].Ordem = angular.copy($scope.OrdemAtual);
+    $scope.materialSelecionadoDescer.Ordem = angular.copy($scope.OrdemAbaixo);
+    console.log($scope.ordemCopy[index].Ordem);};};};};   
 
+    //Cancela as alterações feitas na ordem.
    $scope.resetOrdem = function() {
     $scope.ordemCopy = angular.copy($scope.materiais);};
-        
+    
+    //Salva as alterções feitas na ordem.
    $scope.updateOrdem = function(ordemCopy) {
     angular.copy(ordemCopy, $scope.materiais);};
    
@@ -153,6 +164,7 @@ crud.controller("controller", function ($scope) {
    $scope.novoId = function() {
     $scope.novoMaterial.Id = $scope.materiais.length + 1};
 
+    //Gera o fator ordem para um novo material.
    $scope.ordem = function() {
     $scope.novoMaterial.Ordem = $scope.materiais.length + 1};
    
